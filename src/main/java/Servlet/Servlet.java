@@ -22,6 +22,7 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import com.ibm.watson.developer_cloud.service.WatsonService;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
@@ -135,7 +136,7 @@ public class Servlet extends HttpServlet {
 			
 			//JSON parse
 			JSONObject obj = new JSONObject(translatedText);
-			JSONObject obj2 = obj.getJSONObject("translations");
+			JSONArray obj2 = obj.getJSONArray("translations");
 			String sub2 = obj2.getString("translation");
 			
 			//Text to speech
