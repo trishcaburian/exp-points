@@ -23,6 +23,7 @@ import javax.swing.*;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
+import net.sf.json.JSONSerializer;
 
 import com.ibm.watson.developer_cloud.service.WatsonService;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
@@ -135,9 +136,9 @@ public class Servlet extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request,response);*/
 			
 			//JSON parse
-			JSONObject obj = new JSONObject(translatedText);
-			JSONObject obj2 = (JSONObject) obj.get("translations");
-			String sub2 = obj2.getString("translation");
+			JSONObject obj = (JSONObject) JSONSerializer.toJSON(translatedText);        
+			JSONObject b2 = obj.getJSONObject("translations");
+			String sub2 = b2.getString("translation");
 			
 			//Text to speech
 			TexttoSpeechConnector tsconnector = new TexttoSpeechConnector(); 
