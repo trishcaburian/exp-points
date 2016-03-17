@@ -12,9 +12,9 @@
         <title>It's something</title>
     </head>
     <body>
-        <form method="POST" action="TwilioServlet">
+        <form method="POST" action="Servlet">
 			<p>
-				<input name="to_translate" id="to_translate" type="text" value="" placeholder="Enter your Twilio phone number here">
+				<input name="to_translate" id="to_translate" type="text" value="" placeholder="word">
             </p>
             <input type="submit" value="Translate!">
         </form>
