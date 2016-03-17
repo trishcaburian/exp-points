@@ -135,7 +135,8 @@ public class Servlet extends HttpServlet {
 			
 			//JSON parse
 			JSONObject obj = new JSONObject(translatedText);
-			JSONObject obj2 = obj.getJSONObject("translations");
+			String sub = obj.getString("translations");
+			JSONObject obj2 = new JSONObject(sub);
 			String sub2 = obj2.getString("translation");
 			
 			//Text to speech
