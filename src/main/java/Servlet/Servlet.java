@@ -1,8 +1,7 @@
 package Servlet;
 
-import Bean.Connectors;
-import com.ibm.watson.developer_cloud.language_translation.v2.LanguageTranslation;
-import com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;
+import Bean.TexttoSpeechConnector;
+import Bean.LanguageTranslatorConnector;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,11 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.*;
-import org.json.simple.parser.JSONParser;
+import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import java.awt.Component;
+import java.io.*;
+import java.net.URL;
+import javax.sound.sampled.*;
+import javax.swing.*;
 
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.service.WatsonService;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
 import com.ibm.watson.developer_cloud.util.ResponseUtil;
@@ -24,6 +30,10 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
 import javax.servlet.annotation.WebServlet;
+
+
+import com.ibm.watson.developer_cloud.language_translation.v2.LanguageTranslation;
+import com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;
 
 @WebServlet(name = "Servlet", urlPatterns = {"/Servlet"})
 public class Servlet extends HttpServlet {
@@ -124,9 +134,9 @@ public class Servlet extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request,response);*/
 			
 			//JSON parse
-			JSONParser parse = new JSONParser();
-			JSONObject trans_object = (JSONObject) parse.parse(translatedText);
-			String tospeech = trans_object.getJSONObject("translations").getString("translation");
+			JsonObject jsonObject = new JsonParser().parse(translatedText).getAsJsonObject();
+
+			String tospeech = jsonObject.get("name").getAsString();
 			
 			//Text to speech
 			TextToSpeech service = new TextToSpeech();
@@ -147,7 +157,7 @@ public class Servlet extends HttpServlet {
             response.setContentType("audio/wav"); 
 			response.setHeader("Content-disposition","attachment;filename=output.wav");  
  
-			OutputStream os =output;   
+			OutputStream os = output;   
                                 
 			os.flush();  
 			os.close();
