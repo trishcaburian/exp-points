@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+	compile 'org.json:json:20160212'
 	compile 'com.twilio.sdk:twilio-java-sdk:6.3.0'
 	compile 'javax.servlet:javax.servlet-api:4.0.0-b01'
 	compile 'org.apache.clerezza.ext:org.json.simple:0.4'

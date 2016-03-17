@@ -21,8 +21,8 @@ import java.net.URL;
 import javax.sound.sampled.*;
 import javax.swing.*;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import org.json.JSONObject;
+
 import com.ibm.watson.developer_cloud.service.WatsonService;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
 import com.ibm.watson.developer_cloud.util.ResponseUtil;
@@ -127,19 +127,15 @@ public class Servlet extends HttpServlet {
             //TranslationResult translated = languageTranslation.translate("hello", "en", "es");
 			String translatedText = translated.toString();
 			
-			request.setAttribute("outputText",translatedText);
+			//request.setAttribute("outputText",translatedText);
 			
 			/*response.setContentType("text/html");
 			response.setStatus(200);
 			request.getRequestDispatcher("index.jsp").forward(request,response);*/
 			
 			//JSON parse
-			JsonObject jsonObject = new JsonParser().parse(translatedText).getAsJsonObject();
-			String sub2 = jsonObject.getAsJsonObject("translations").getAsJsonObject("translation").getAsString();
-			
-			//JsonObject obj2 = new JsonParser().parse(sub).getAsJsonObject();
-			
-			
+			JSONObject obj = new JSONObject(translatedText);
+			String sub2 = obj.getJSONObject("translations").getString("translation");
 			
 			//Text to speech
 			TextToSpeech service = new TextToSpeech();
