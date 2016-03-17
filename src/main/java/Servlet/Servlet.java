@@ -146,7 +146,7 @@ public class Servlet extends HttpServlet {
 			TextToSpeech service = new TextToSpeech();
 			service.setUsernameAndPassword(connector.getUsername(),connector.getPassword());
 			
-			String text = tospeech;
+			String text = sub2;
         	String format = "audio/wav";
 
   			InputStream speech = service.synthesize(text, format);
