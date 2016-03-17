@@ -136,12 +136,12 @@ public class Servlet extends HttpServlet {
 			//JSON parse
 			JSONObject obj = new JSONObject(translatedText);
 			JSONObject obj2 = obj.getJSONObject("translations");
-			//JSONObject obj2 = new JSONObject(sub);
 			String sub2 = obj2.getString("translation");
 			
 			//Text to speech
+			TexttoSpeechConnector tsconnector = new TexttoSpeechConnector(); 
 			TextToSpeech service = new TextToSpeech();
-			service.setUsernameAndPassword(connector.getUsername(),connector.getPassword());
+			service.setUsernameAndPassword(tsconnector.getUsername(),tsconnector.getPassword());
 			
 			String text = sub2;
         	String format = "audio/wav";
