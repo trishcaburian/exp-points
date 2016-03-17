@@ -135,9 +135,7 @@ public class Servlet extends HttpServlet {
 			
 			//JSON parse
 			JsonObject jsonObject = new JsonParser().parse(translatedText).getAsJsonObject();
-
-			JsonObject sub = jsonObject.get("translations");
-			String sub2 = sub.get("translation").getAsString();
+			String sub2 = jsonObject.getAsJsonObject("translations").getAsJsonObject("translation").getAsString();
 			
 			//JsonObject obj2 = new JsonParser().parse(sub).getAsJsonObject();
 			
