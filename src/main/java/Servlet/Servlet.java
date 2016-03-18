@@ -145,11 +145,11 @@ public class Servlet extends HttpServlet {
 			String sub2 = null; //obj2.getString("translation");
 			
 			
-			for (int i = 0; i < obj2.length(); ++i) {
-				JSONObject rec = obj2.getJSONObject(i);
+			//for (int i = 0; i < obj2.length(); ++i) {
+				JSONObject rec = obj2.getJSONObject(0);
 				String loc = rec.getString("translation");
-				
-			}
+				sub2 = loc;
+			//}
 			
 			//Text to speech
 			TexttoSpeechConnector tsconnector = new TexttoSpeechConnector(); 
