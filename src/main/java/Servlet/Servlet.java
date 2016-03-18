@@ -140,7 +140,7 @@ public class Servlet extends HttpServlet {
 			JSONObject obj = (JSONObject) JSONSerializer.toJSON(translatedText);        
 			//JSONObject b2 = obj.getJSONObject("translations");
 			String sub = obj.getString("translations");
-			JSONObject obj2 = (JSONObject) JSONSerializer.toJSON(sub);
+			JSONArray obj2 = (JSONArray) JSONSerializer.toJSON(sub);
 			String sub2 = obj.getString("translation");
 			
 			
