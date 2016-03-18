@@ -169,6 +169,10 @@ public class Servlet extends HttpServlet {
 
   			InputStream speech = service.synthesize(text, format);
 			
+			ObjectStorageConnector connect = new ObjectStorageConnector();
+			Payload upfile = Payloads.create(speech);
+			connect.uploadFile("sample", "Servlet.wav", upfile);
+			
             OutputStream output = response.getOutputStream();
 
 			byte[] buf = new byte[2046];
@@ -182,12 +186,10 @@ public class Servlet extends HttpServlet {
  
 			OutputStream os = output;   
                                 
-			os.flush();  
+			//os.flush();  
 			os.close();
 			
-			ObjectStorageConnector connect = new ObjectStorageConnector();
-			Payload upfile = Payloads.create(speech);
-			connect.uploadFile("sample", "Servlet.wav", upfile);
+			
 		//processRequest(request, response);
 		/*obj storage
 		ObjectStorageConnector connect = new ObjectStorageConnector();
