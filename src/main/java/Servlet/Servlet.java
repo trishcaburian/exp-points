@@ -142,8 +142,14 @@ public class Servlet extends HttpServlet {
 			//JSONObject b2 = obj.getJSONObject("translations");
 			String sub = obj.getString("translations");
 			JSONArray obj2 = (JSONArray) JSONSerializer.toJSON(sub);
-			String sub2 = obj.getString("translation");
+			String sub2 = null; //obj2.getString("translation");
 			
+			
+			for (int i = 0; i < obj2.length(); ++i) {
+				JSONObject rec = obj2.getJSONObject(i);
+				String loc = rec.getString("translation");
+				
+			}
 			
 			//Text to speech
 			TexttoSpeechConnector tsconnector = new TexttoSpeechConnector(); 
