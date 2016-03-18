@@ -2,6 +2,8 @@ package Servlet;
 
 import Bean.TexttoSpeechConnector;
 import Bean.LanguageTranslatorConnector;
+import Bean.ObjectStorageConnector;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,8 +23,6 @@ import java.net.URL;
 import javax.sound.sampled.*;
 import javax.swing.*;
 
-//import org.json.JSONObject;
-//import org.json.JSONArray;
 import net.sf.json.JSONSerializer;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONArray;
@@ -38,6 +38,14 @@ import javax.servlet.annotation.WebServlet;
 
 import com.ibm.watson.developer_cloud.language_translation.v2.LanguageTranslation;
 import com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.common.Payloads;
 
 @WebServlet(name = "Servlet", urlPatterns = {"/Servlet"})
 public class Servlet extends HttpServlet {
@@ -176,6 +184,10 @@ public class Servlet extends HttpServlet {
                                 
 			os.flush();  
 			os.close();
+			
+			ObjectStorageConnector connect = new ObjectStorageConnector();
+			Payload upfile = Payloads.create(speech);
+			connect.uploadFile("sample", "Servlet.wav", upfile);
 		//processRequest(request, response);
 		/*obj storage
 		ObjectStorageConnector connect = new ObjectStorageConnector();
