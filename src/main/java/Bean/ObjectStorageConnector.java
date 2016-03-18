@@ -40,7 +40,7 @@ public class ObjectStorageConnector {
             String envApp = System.getenv("VCAP_APPLICATION");
             String envServices = System.getenv("VCAP_SERVICES");
             
-            JSONParser parser = new JSONParser();
+            /*JSONParser parser = new JSONParser();
             Object obj = parser.parse(envServices);
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray vcapArray = (JSONArray) jsonObject.get("Object-Storage");
@@ -54,8 +54,41 @@ public class ObjectStorageConnector {
             username = credentials.get("username").toString();
             password = credentials.get("password").toString();
             domainId = credentials.get("domainId").toString();
-            domainName = credentials.get("domainName").toString();
-            
+            domainName = credentials.get("domainName").toString();*/
+            //
+			
+			
+			try {
+                JSONParser parser = new JSONParser();
+                JSONObject vcap = (JSONObject) parser.parse(env.get("VCAP_SERVICES"));
+                JSONObject service = null;
+
+                for (Object key : vcap.keySet()) {
+                    String keyStr = (String) key;
+                    if (keyStr.toLowerCase().contains("Object-Storage")) {
+                        service = (JSONObject) ((JSONArray) vcap.get(keyStr)).get(0);
+                        break;
+                    }
+                }
+
+                if (service != null) {
+                    JSONObject credentials = (JSONObject) service.get("credentials");
+                    auth_url = credentials.get("auth_url").toString() + "/v3";
+					project = credentials.get("project").toString();
+					projectId = credentials.get("projectId").toString();
+					region = credentials.get("region").toString();
+					userId = credentials.get("userId").toString();
+					username = credentials.get("username").toString();
+					password = credentials.get("password").toString();
+					domainId = credentials.get("domainId").toString();
+					domainName = credentials.get("domainName").toString();
+                }
+            } catch (Exception e) {
+                e.printStackTrace(System.err);
+            }
+			
+			
+			//
             Identifier domainIdent = Identifier.byName(domainName);
             Identifier projectIdent = Identifier.byName(project);
             
