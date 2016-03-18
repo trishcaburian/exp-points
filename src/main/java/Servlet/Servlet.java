@@ -136,12 +136,7 @@ public class Servlet extends HttpServlet {
 			//JSON parse
 			JsonObject jsonObject = new JsonParser().parse(translatedText).getAsJsonObject();
 
-			JsonObject sub = jsonObject.get("translations");
-			String sub2 = sub.get("translation").getAsString();
-			
-			//JsonObject obj2 = new JsonParser().parse(sub).getAsJsonObject();
-			
-			
+			JsonObject sub = jsonObject.get("translations").getAsString();
 			
 			//Text to speech
 			TextToSpeech service = new TextToSpeech();
@@ -151,6 +146,7 @@ public class Servlet extends HttpServlet {
         	String format = "audio/wav";
 
   			InputStream speech = service.synthesize(text, format);
+			
             OutputStream output = response.getOutputStream();
 
 			byte[] buf = new byte[2046];
@@ -167,6 +163,11 @@ public class Servlet extends HttpServlet {
 			os.flush();  
 			os.close();
 		//processRequest(request, response);
+		/*obj storage
+		ObjectStorageConnector connect = new ObjectStorageConnector();
+		Payload upfile = Payloads.create(speech);
+		connect.uploadFile("sample", "Servlet.wav", upfile);
+		*/
     }
 
     /**
