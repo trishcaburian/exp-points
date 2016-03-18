@@ -139,7 +139,10 @@ public class Servlet extends HttpServlet {
 			//JSON parse
 			JSONObject obj = (JSONObject) JSONSerializer.toJSON(translatedText);        
 			//JSONObject b2 = obj.getJSONObject("translations");
-			String sub2 = obj.getString("translations");
+			String sub = obj.getString("translations");
+			JSONObject obj2 = (JSONObject) JSONSerializer.toJSON(sub);
+			String sub2 = obj.getString("translation");
+			
 			
 			//Text to speech
 			TexttoSpeechConnector tsconnector = new TexttoSpeechConnector(); 
