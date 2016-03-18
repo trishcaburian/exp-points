@@ -39,6 +39,10 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.4'
 	compile 'com.ibm.watson.developer_cloud:java-sdk:2.8.0'
 	
+	compile 'org.pacesys:openstack4j:2.10'
+	compile 'org.pacesys.openstack4j.connectors:openstack4j-jersey2:2.10'
+	compile 'org.pacesys.openstack4j.connectors:openstack4j-httpclient:2.10'
+	
     testCompile 'junit:junit:4.12'   
 	
 }
