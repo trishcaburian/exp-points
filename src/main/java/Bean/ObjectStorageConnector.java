@@ -1,11 +1,12 @@
 package Bean;
 
 import java.util.List;
-
+import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 
 import org.openstack4j.api.OSClient;
 import org.openstack4j.model.storage.object.SwiftAccount;
@@ -39,7 +40,7 @@ public class ObjectStorageConnector {
 		try {
             String envApp = System.getenv("VCAP_APPLICATION");
             String envServices = System.getenv("VCAP_SERVICES");
-            
+            Map<String, String> env = System.getenv();
             /*JSONParser parser = new JSONParser();
             Object obj = parser.parse(envServices);
             JSONObject jsonObject = (JSONObject) obj;
@@ -100,7 +101,7 @@ public class ObjectStorageConnector {
             
             account = os.objectStorage().account().get();
             
-        } catch (ParseException ex) {
+        } catch (Exception ex) {
         }
 	}
 	
