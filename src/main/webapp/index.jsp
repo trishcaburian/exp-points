@@ -14,9 +14,9 @@
     <body>
         <form method="POST" action="Servlet">
 			<p>
-				<input name="to_translate" id="to_translate" type="text" value="" placeholder="word">
+				<input name="img_url" id="img_url" type="text" value="" placeholder="Image URL">
             </p>
-            <input type="submit" value="Translate!">
+            <input type="submit" value="Extract Information">
         </form>
     </body>
 </html>
